@@ -428,3 +428,6 @@ FodyWeavers.xsd
 #VCX
 *.vcxproj
 *.vcxproj.filters
+
+#Instruction Files
+*.ini
