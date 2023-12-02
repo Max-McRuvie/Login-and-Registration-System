@@ -1,7 +1,7 @@
-#include "database.h"
+#include "databasehandler.h"
 
 // constructor
-Database::Database(const std::string& host, const std::string& user, const std::string& password, const std::string& database)
+DatabaseHandler::DatabaseHandler(const std::string& host, const std::string& user, const std::string& password, const std::string& database)
 {
 	driver = get_driver_instance();
 	con = driver->connect(host, user, password);
@@ -9,13 +9,13 @@ Database::Database(const std::string& host, const std::string& user, const std::
 }
 
 // destructor
-Database::~Database()
+DatabaseHandler::~DatabaseHandler()
 {
 	delete con;
 }
 
 // connect to DB
-bool Database::connect()
+bool DatabaseHandler::connect()
 {
 	try 
 	{
@@ -34,7 +34,7 @@ bool Database::connect()
 }
 
 // disconnect from DB
-void Database::disconnect()
+void DatabaseHandler::disconnect()
 {
 	delete con;
 }

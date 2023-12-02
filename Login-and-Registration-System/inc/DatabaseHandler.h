@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef DATABASE_H
+#ifndef DATABASEHANDLER_H
 
 #include <mysql_driver.h>
 #include <mysql_connection.h>
@@ -9,7 +9,7 @@
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
 
-class Database
+class DatabaseHandler
 {
 	private:
 		sql::Driver* driver; 
@@ -17,8 +17,8 @@ class Database
 		//sql::Statement *stmt; 
 		//sql::PreparedStatement* pstmt; 
 	public:
-		Database(const std::string& host, const std::string& user, const std::string& password, const std::string& database);
-		~Database();
+		DatabaseHandler(const std::string& host, const std::string& user, const std::string& password, const std::string& database);
+		~DatabaseHandler();
 	
 		bool connect();
 		void disconnect();

@@ -3,7 +3,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
-#include "database.h"
+#include "databasehandler.h"
 
 int main()
 {
@@ -20,7 +20,7 @@ int main()
 		std::string databaseName = pt.get<std::string>("Database.DatabaseName");
 
 		// initialise instance of database
-		Database myDB(server, username, password, databaseName);
+		DatabaseHandler myDB(server, username, password, databaseName);
 
 		// connect to DB
 		if (myDB.connect())
