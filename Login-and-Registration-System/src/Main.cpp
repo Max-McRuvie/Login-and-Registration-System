@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "databasehandler.h"
+#include "User.h"
 
 int main()
 {
@@ -13,10 +14,21 @@ int main()
 		// connect to DB
 		if (myDB.connect())
 		{
-			std::cout << "Connected to the database!" << std::endl;
+			std::cout << "Connected to the database!" << '\n';
 
 			myDB.disconnect();
 			std::cout << "Disconnected";
+			std::cout << '\n';
+			
+			User newUser("Max", "123");
+
+			std::string Name = newUser.getUsername();
+			std::string Pass = newUser.getPassword();
+
+			std::cout << Name << '\n';
+			std::cout << Pass << '\n';
+			
+
 		}
 	}
 	catch (const std::exception& e) 
