@@ -17,7 +17,7 @@ class DatabaseHandler
 		//sql::Statement *stmt; 
 		//sql::PreparedStatement* pstmt; 
 	public:
-		DatabaseHandler(const std::string& host, const std::string& user, const std::string& password, const std::string& database);
+		DatabaseHandler(const std::string& configFile);
 		~DatabaseHandler();
 	
 		bool connect();
