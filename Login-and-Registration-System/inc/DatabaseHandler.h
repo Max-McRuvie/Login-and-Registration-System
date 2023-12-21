@@ -8,20 +8,23 @@
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 
 class DatabaseHandler
 {
 	private:
 		sql::Driver* driver; 
 		sql::Connection* con; 
-		//sql::Statement *stmt; 
-		//sql::PreparedStatement* pstmt; 
+		sql::Statement *stmt; 
+		sql::PreparedStatement* pstmt; 
 	public:
 		DatabaseHandler(const std::string& configFile);
 		~DatabaseHandler();
 	
 		bool connect();
 		void disconnect();
+		void addUser(const std::string& username, const std::string& password);
+		bool findUser(const std::string& username);
 };
 
 #endif // DATABASE_H

@@ -53,3 +53,45 @@ void DatabaseHandler::disconnect()
 {
 	delete con;
 }
+
+// insert user
+void DatabaseHandler::addUser(const std::string& username, const std::string& password)
+{
+	try
+	{
+		pstmt = con->prepareStatement("INSERT INTO users(username, password) VALUES(?,?)");
+		pstmt->setString(1, username);
+		pstmt->setString(2, password);
+		pstmt->execute();
+		std::cout << "User Successfully Added" << "n/";
+	}
+	catch (sql::SQLException& e)
+	{
+		// Handle the exception (e.g., log or throw)
+		std::cerr << "Error adding user: " << e.what() << std::endl;
+	}
+}
+
+// check user
+bool DatabaseHandler::findUser(const std::string& username)
+{
+	try
+    {
+        pstmt = con->prepareStatement("SELECT username FROM users WHERE username = ?");
+        pstmt->setString(1, username);
+
+        // Execute the query and get the result set
+        std::unique_ptr<sql::ResultSet> resultSet(pstmt->executeQuery());
+
+        // Check if the result set has any rows
+        return resultSet->next();
+    }
+    catch (sql::SQLException& e)
+    {
+        // Handle the exception (e.g., log or throw)
+        std::cerr << "Error checking if user exists: " << e.what() << std::endl;
+        return false; // Assuming false means an error occurred
+    }
+	
+}
+
