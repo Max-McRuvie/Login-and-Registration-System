@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "databasehandler.h"
-#include "User.h"
+#include "database/databasehandler.h"
+#include "user/User.h"
 
 int main()
 {
