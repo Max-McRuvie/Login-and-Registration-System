@@ -90,7 +90,7 @@ bool DatabaseHandler::findUser(const std::string& username)
     {
         // Handle the exception (e.g., log or throw)
         std::cerr << "Error checking if user exists: " << e.what() << std::endl;
-        return false; // Assuming false means an error occurred
+		throw; // Assuming false means an error occurred
     }
 	
 }
