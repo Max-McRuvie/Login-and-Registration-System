@@ -6,6 +6,7 @@
 
 // constructor
 DatabaseHandler::DatabaseHandler(const std::string& configFile)
+	: driver(nullptr), con(nullptr), stmt(nullptr), pstmt(nullptr)
 {
 	// retrieve config file
 	boost::property_tree::ptree pt;
@@ -21,12 +22,6 @@ DatabaseHandler::DatabaseHandler(const std::string& configFile)
 	driver = get_driver_instance();
 	con = driver->connect(server, username, password);
 	con->setSchema(databaseName);
-}
-
-// destructor
-DatabaseHandler::~DatabaseHandler()
-{
-	delete con;
 }
 
 // connect to DB
@@ -51,7 +46,11 @@ bool DatabaseHandler::connect()
 // disconnect from DB
 void DatabaseHandler::disconnect()
 {
-	delete con;
+	// close connection
+	con->close();
+
+	// delete pstmt
+	delete pstmt;
 }
 
 // insert user
@@ -59,6 +58,9 @@ void DatabaseHandler::addUser(const std::string& username, const std::string& pa
 {
 	try
 	{
+		// clear previous statement
+		delete pstmt;
+
 		pstmt = con->prepareStatement("INSERT INTO users(username, password) VALUES(?,?)");
 		pstmt->setString(1, username);
 		pstmt->setString(2, password);

@@ -13,13 +13,13 @@
 class DatabaseHandler
 {
 	private:
+		// member vars
 		sql::Driver* driver; 
 		sql::Connection* con; 
 		sql::Statement *stmt; 
 		sql::PreparedStatement* pstmt; 
 	public:
 		DatabaseHandler(const std::string& configFile);
-		~DatabaseHandler();
 	
 		bool connect();
 		void disconnect();
